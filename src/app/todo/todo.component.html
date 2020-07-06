@@ -1,0 +1,36 @@
+<div id="container">
+    <section>
+     <div class="headers">
+      <h1>{{ title }}</h1>
+      <p>A place to store the things you have to do!</p>
+     </div>
+     <!-- <div class="list-items">
+      <input type="text" placeholder="Filter your to-dos" (input)="filterTodos($event)" [(ngModel)]="filterText" />
+     </div> -->
+     <div class="list-items">
+      <ol>
+        <!-- Array of items to filter -->
+       <li *ngFor="let item of filteredTodo; let i=index">
+         <!-- Complete button to complete a task -->
+       <button id="complete"  (click)="completeTask(i)" *ngIf="!item.completed">Complete</button>
+       <!-- Additing,styling -->
+       <span class="tasks" *ngIf="!item.editing; else editingTodo" (dblclick)="editTodo(item)"[ngClass]="{'strikethrough':item.completed}" >{{item.task}}</span>
+       <ng-template #editingTodo>
+          <input type="text" class="editing-todo" [(ngModel)]="item.task" (blur)="doneEdit(item)" autofocus/>
+       </ng-template>
+       <!-- Deleting when clicked on x -->
+       <button id='delete' (click)="removeTask(i)"><i class="fas fa-times" ></i></button>
+       </li>
+      </ol>
+     </div>
+     <div class="list-items">
+      <input type="text" placeholder="Add your to do" [(ngModel)]="addInput"/>
+    </div>
+      <div id=formatting>
+      <button id ='toadd' (click)="addTask()">Add</button>
+    </div>
+     
+    </section>
+  
+   </div>
+  </div>
