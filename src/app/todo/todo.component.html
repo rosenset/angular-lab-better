@@ -1,25 +1,25 @@
-<div id="container">
+<!-- <div id="container">
     <section>
      <div class="headers">
       <h1>{{ title }}</h1>
       <p>A place to store the things you have to do!</p>
-     </div>
+     </div> -->
      <!-- <div class="list-items">
       <input type="text" placeholder="Filter your to-dos" (input)="filterTodos($event)" [(ngModel)]="filterText" />
      </div> -->
-     <div class="list-items">
-      <ol>
+     <!-- <div class="list-items">
+      <ol> -->
         <!-- Array of items to filter -->
-       <li *ngFor="let item of filteredTodo; let i=index">
+       <!-- <li *ngFor="let item of filteredTodo; let i=index"> -->
          <!-- Complete button to complete a task -->
-       <button id="complete"  (click)="completeTask(i)" *ngIf="!item.completed">Complete</button>
+       <!-- <button id="complete"  (click)="completeTask(i)" *ngIf="!item.completed">Complete</button> -->
        <!-- Additing,styling -->
-       <span class="tasks" *ngIf="!item.editing; else editingTodo" (dblclick)="editTodo(item)"[ngClass]="{'strikethrough':item.completed}" >{{item.task}}</span>
+       <!-- <span class="tasks" *ngIf="!item.editing; else editingTodo" (dblclick)="editTodo(item)"[ngClass]="{'strikethrough':item.completed}" >{{item.task}}</span>
        <ng-template #editingTodo>
           <input type="text" class="editing-todo" [(ngModel)]="item.task" (blur)="doneEdit(item)" autofocus/>
-       </ng-template>
+       </ng-template> -->
        <!-- Deleting when clicked on x -->
-       <button id='delete' (click)="removeTask(i)"><i class="fas fa-times" ></i></button>
+       <!-- <button id='delete' (click)="removeTask(i)"><i class="fas fa-times" ></i></button>
        </li>
       </ol>
      </div>
@@ -33,4 +33,32 @@
     </section>
   
    </div>
-  </div>
+  </div> -->
+
+  <div class="todo-list">
+    <h1>TODO List</h1>
+    <h4>A Place To Store Your Todos</h4>
+    <input type="text" 
+        class="todo-filter" 
+        placeholder="Filter Your Todos" 
+        [(ngModel)]="filterInput" 
+        (input)="filterToDo()"/>
+    <div class="to-do">
+        <div class="todo-item" 
+            *ngFor="let item of filteredToDoArray; let i = index"> {{i + 1}}.
+            <button *ngIf="!item.completed" 
+                (click)="item.completed = true" 
+                class="complete-btn">Complete</button>
+            <div class="item-task" 
+                [ngStyle]="{'text-decoration': item.completed ? 'line-through' : 'none'}"> {{ item.task }} </div>
+            <button class="remove-btn" 
+                (click)="removeTask(item, i)"><i class="fa fa-times-circle" aria-hidden="true"></i></button>
+        </div>
+    </div>
+    <input type="text" 
+        class="todo-add" 
+        placeholder="Add your to-do" 
+        [(ngModel)]="value">
+    <button class="add-btn" 
+        (click)="addTask()">Add</button>
+</div>
